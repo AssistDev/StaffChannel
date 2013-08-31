@@ -1,0 +1,8 @@
+name: StaffChannel
+version: 1.0
+author: Assist
+main: main.java.me.avastprods.staffchannel.Main
+commands:
+  sc:
+    description: StaffChannel main command
+    alias: [staffchannel]
