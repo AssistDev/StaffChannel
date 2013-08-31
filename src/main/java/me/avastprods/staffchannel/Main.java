@@ -15,6 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
 
+	public String prefix = ChatColor.BLUE + "[" + ChatColor.RESET + "StaffChannel" + ChatColor.BLUE + "] " + ChatColor.RESET;
+	
 	ArrayList<String> list = new ArrayList<String>();
 
 	public void onEnable() {
@@ -31,11 +33,11 @@ public class Main extends JavaPlugin implements Listener {
 					if (s.hasPermission("sc.toggle")) {
 						if (!list.contains(s.getName())) {
 							list.add(s.getName());
-							s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.WHITE + "StaffChat enabled.");
+							s.sendMessage(prefix + "StaffChat enabled.");
 
 						} else {
 							list.remove(s.getName());
-							s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.WHITE + "StaffChat disabled.");
+							s.sendMessage(prefix + "StaffChat disabled.");
 						}
 					} else {
 						s.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "Insufficient permissions.");
@@ -62,7 +64,7 @@ public class Main extends JavaPlugin implements Listener {
 					if(args[0].equalsIgnoreCase("list")) {
 						if(s.hasPermission("sc.list")) {
 							Object[] theList = list.toArray();
-							s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + StringUtils.join(theList, ' ', 0, theList.length));
+							s.sendMessage(prefix + StringUtils.join(theList, ' ', 0, theList.length));
 						} else {
 							s.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "Insufficient permissions.");
 						}
@@ -76,13 +78,13 @@ public class Main extends JavaPlugin implements Listener {
 							if (target != null) {
 								if (!list.contains(target.getName())) {
 									list.add(target.getName());
-									s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.WHITE + "Added player '" + ChatColor.GRAY + target.getDisplayName() + ChatColor.WHITE + "' to the stafflist.");
+									s.sendMessage(prefix + "Added player '" + ChatColor.GRAY + target.getDisplayName() + ChatColor.WHITE + "' to the stafflist.");
 
 								} else {
-									s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.RED + "This player is already in the staff channel.");
+									s.sendMessage(prefix + ChatColor.RED + "This player is already in the staff channel.");
 								}
 							} else {
-								s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.RED + "This player is either not online, or does not exist.");
+								s.sendMessage(prefix + ChatColor.RED + "This player is either not online, or does not exist.");
 							}
 						} else {
 							s.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "Insufficient permissions.");
@@ -95,13 +97,13 @@ public class Main extends JavaPlugin implements Listener {
 							if (target != null) {
 								if (list.contains(target.getName())) {
 									list.remove(target.getName());
-									s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.WHITE + "Kicked player '" + ChatColor.GRAY + target.getDisplayName() + ChatColor.WHITE + "' from the stafflist.");
+									s.sendMessage(prefix + "Kicked player '" + ChatColor.GRAY + target.getDisplayName() + ChatColor.WHITE + "' from the stafflist.");
 
 								} else {
-									s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.RED + "This player is not in the staff channel.");
+									s.sendMessage(prefix + ChatColor.RED + "This player is not in the staff channel.");
 								}
 							} else {
-								s.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.RED + "This player is either not online, or does not exist.");
+								s.sendMessage(prefix + ChatColor.RED + "This player is either not online, or does not exist.");
 							}
 						} else {
 							s.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "Insufficient permissions.");
@@ -120,7 +122,7 @@ public class Main extends JavaPlugin implements Listener {
 			for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 				if (list.contains(all.getName())) {
 					e.setCancelled(true);
-					all.sendMessage(ChatColor.GRAY + "[StaffChannel] " + ChatColor.RESET + p.getDisplayName() + ChatColor.GRAY + "> " + ChatColor.RESET + e.getMessage());
+					all.sendMessage(prefix + p.getDisplayName() + ChatColor.GRAY + "> " + ChatColor.RESET + e.getMessage());
 				}
 			}
 		}
